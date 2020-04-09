@@ -4,7 +4,7 @@ A Maya extension to export models and animations to Ogre binary format. Updated 
 ## Original authors
 Bitgate, Inc. has not written the majority of this extension, but only improved upon it or fixed issues to make it compatible with the latest version of Maya. The original authors, in chronological order, are:
  - Francesco Giordana, sponsored by Anygma N.V;
- - Filmakademie Baden-Wuerttemberg, Institute of Animation's R&D Lab;
+ - Filmakademie Baden-Württemberg, Institute of Animation's R&D Lab;
 
 ## Changes from the original
 The original code did not compile on VS2017 due to use of deprecated code, so for a start the deprecated code has been replaced by its newer replacements. The build process has been simplified greatly, only being one CMake file now and using a MAYA_HOME variable to use the correct Maya version.

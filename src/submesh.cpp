@@ -16,17 +16,17 @@
 - 				community, it still has to be reviewed and fixed.  		            		-		
 ---------------------------------------------------------------------------------------------
 - Original version by Francesco Giordana, sponsored by Anygma N.V. (http://www.nazooka.com) -
-- The previous version was maintained by Filmakademie Baden-Wuerttemberg, 					-
+- The previous version was maintained by Filmakademie Baden-WÃ¼rttemberg, 					-
 - Institute of Animation's R&D Lab (http://research.animationsinstitut.de)  				-
 -																							-
 - The current version (at https://www.github.com/bitgate/maya-ogre3d-exporter) is			-
 - maintained by Bitgate, Inc. for the purpose of keeping Ogre compatible with the latest	-
 - technologies.																				-
 ---------------------------------------------------------------------------------------------
-- Copyright (c) 2011 MFG Baden-Württemberg, Innovation Agency for IT and media.             -
+- Copyright (c) 2011 MFG Baden-WÃ¼rttemberg, Innovation Agency for IT and media.             -
 - Research and Development at the Institute of Animation is a cooperation between           -
-- MFG Baden-Württemberg, Innovation Agency for IT and media and                             -
-- Filmakademie Baden-Württemberg as part of the "MFG Visual Experience Lab".                -
+- MFG Baden-WÃ¼rttemberg, Innovation Agency for IT and media and                             -
+- Filmakademie Baden-WÃ¼rttemberg as part of the "MFG Visual Experience Lab".                -
 ---------------------------------------------------------------------------------------------
 - This program is free software; you can redistribute it and/or modify it under				-
 - the terms of the GNU Lesser General Public License as published by the Free Software		-
@@ -385,6 +385,8 @@ namespace OgreMayaExporter
 	// Write submesh data to an Ogre compatible mesh
 	MStatus Submesh::createOgreSubmesh(Ogre::MeshPtr pMesh,const ParamList& params)
 	{
+		Ogre::MaterialManager* matMgr = Ogre::MaterialManager::getSingletonPtr();
+
 		MStatus stat;
 		// Create a new submesh
 		Ogre::SubMesh* pSubmesh;
@@ -392,8 +394,18 @@ namespace OgreMayaExporter
 			pSubmesh = pMesh->createSubMesh(m_name.asChar());
 		else
 			pSubmesh = pMesh->createSubMesh();
+
+		const Ogre::String materialName = m_pMaterial->name().asChar();
+		Ogre::MaterialPtr pMat = matMgr->getByName(materialName);
+		if(!pMat)
+		{
+			// Load a dummy material if necessary so it can be referenced in export.
+			pMat = matMgr->create(materialName, pMesh->getGroup());
+		}
+
 		// Set material
-        pSubmesh->setMaterialName(m_pMaterial->name().asChar());
+		pSubmesh->setMaterialName(materialName);
+
         // Set use shared geometry flag
 		pSubmesh->useSharedVertices = params.useSharedGeom;
 		// Create vertex data for current submesh

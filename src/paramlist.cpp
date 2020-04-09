@@ -16,7 +16,7 @@
 - 				community, it still has to be reviewed and fixed.  		            		-
 ---------------------------------------------------------------------------------------------
 - Original version by Francesco Giordana, sponsored by Anygma N.V. (http://www.nazooka.com) -
-- The previous version was maintained by Filmakademie Baden-Wuerttemberg, 					-
+- The previous version was maintained by Filmakademie Baden-Württemberg, 					-
 - Institute of Animation's R&D Lab (http://research.animationsinstitut.de)  				-
 -																							-
 - The current version (at https://www.github.com/bitgate/maya-ogre3d-exporter) is			-

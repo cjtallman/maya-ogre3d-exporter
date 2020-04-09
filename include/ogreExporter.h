@@ -16,17 +16,17 @@
 - 				community, it still has to be reviewed and fixed.  		            		-		
 ---------------------------------------------------------------------------------------------
 - Original version by Francesco Giordana, sponsored by Anygma N.V. (http://www.nazooka.com) -
-- The previous version was maintained by Filmakademie Baden-Wuerttemberg, 					-
+- The previous version was maintained by Filmakademie Baden-WÃ¼rttemberg, 					-
 - Institute of Animation's R&D Lab (http://research.animationsinstitut.de)  				-
 -																							-
 - The current version (at https://www.github.com/bitgate/maya-ogre3d-exporter) is			-
 - maintained by Bitgate, Inc. for the purpose of keeping Ogre compatible with the latest	-
 - technologies.																				-
 ---------------------------------------------------------------------------------------------
-- Copyright (c) 2011 MFG Baden-Württemberg, Innovation Agency for IT and media.             -
+- Copyright (c) 2011 MFG Baden-WÃ¼rttemberg, Innovation Agency for IT and media.             -
 - Research and Development at the Institute of Animation is a cooperation between           -
-- MFG Baden-Württemberg, Innovation Agency for IT and media and                             -
-- Filmakademie Baden-Württemberg as part of the "MFG Visual Experience Lab".                -
+- MFG Baden-WÃ¼rttemberg, Innovation Agency for IT and media and                             -
+- Filmakademie Baden-WÃ¼rttemberg as part of the "MFG Visual Experience Lab".                -
 ---------------------------------------------------------------------------------------------
 - This program is free software; you can redistribute it and/or modify it under				-
 - the terms of the GNU Lesser General Public License as published by the Free Software		-
@@ -112,6 +112,7 @@ namespace OgreMayaExporter
 		float _lastStop_cam;
 		float _firstStart_cam;
 		Ogre::Root *mr;
+		Ogre::DefaultHardwareBufferManager *bufferManager;
 	};
 
 
@@ -125,13 +126,13 @@ namespace OgreMayaExporter
 		:m_pMesh(0), m_pMaterialSet(0)
 	{
 		MGlobal::displayInfo("Translating scene to OGRE format");		
-		//mr = new Ogre::Root();
+		mr = new Ogre::Root("", "", "ogreMayaExporter.log");
+		bufferManager = new Ogre::DefaultHardwareBufferManager; // needed because we don't have a rendersystem
 	}
 
 	// Routine for creating the plug-in
 	inline void* OgreExporter::creator()
 	{
-		//Ogre::Root *r = new Ogre::Root();
 		return new OgreExporter();
 	}
 
