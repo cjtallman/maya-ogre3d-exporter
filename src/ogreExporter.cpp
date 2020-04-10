@@ -1129,7 +1129,7 @@ namespace OgreMayaExporter
 MStatus initializePlugin( MObject obj )
 {
 	MStatus   status;
-	MFnPlugin plugin( obj, "OgreExporter", "v1.0.0-github", "Any");
+	MFnPlugin plugin( obj, "OgreExporter", "v1.0.1-github", "Any");
 	status = plugin.registerCommand( "ogreExport", OgreMayaExporter::OgreExporter::creator );
 	if (!status) {
 		status.perror("registerCommand");
